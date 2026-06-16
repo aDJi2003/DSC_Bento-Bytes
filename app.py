@@ -146,26 +146,6 @@ with tab1:
             f"{int(row['Management_Readiness'].iloc[0])}/4</div>",
             unsafe_allow_html=True)
 
-    st.divider()
-    # ---- penjelasan lokal: kontribusi tiap fitur untuk profil ini ----
-    st.markdown("**Apa yang mendorong prediksi ini?** "
-                "(kontribusi tiap fitur terhadap profil di atas)")
-    x_std = scaler.transform(row)[0]
-    contrib = pd.Series(x_std * clf.coef_[0], index=row.columns)
-    contrib = contrib[contrib.abs() > 1e-6].sort_values()
-    cdf = contrib.reset_index()
-    cdf.columns = ["Fitur", "Kontribusi"]
-    fig = px.bar(cdf, x="Kontribusi", y="Fitur", orientation="h",
-                 color="Kontribusi",
-                 color_continuous_scale=[RED, "#eeeeee", GREEN],
-                 color_continuous_midpoint=0)
-    fig.update_layout(height=340, coloraxis_showscale=False,
-                      margin=dict(t=10, b=10))
-    fig.add_vline(x=0, line_color="black", line_width=1)
-    st.plotly_chart(fig, use_container_width=True)
-    st.caption("Batang hijau mendorong ke arah BERHASIL, merah ke arah TIDAK "
-               "BERHASIL. Panjang batang = besar pengaruh untuk profil ini.")
-
 # ======================================================================
 # TAB 2 — MENGAPA (interpretasi global)
 # ======================================================================
@@ -181,7 +161,7 @@ with tab2:
     st.success("**Temuan utama:** *Management_Readiness* (kesiapan manajerial "
                "kumulatif: modal + pencatatan keuangan + internet + rencana bisnis) "
                "mendominasi seluruh fitur. Faktor demografis (usia, gender, "
-               "pendidikan) nyaris tak berpengaruh — keberhasilan ditentukan oleh "
+               "pendidikan) nyaris tak berpengaruh, keberhasilan ditentukan oleh "
                "**apa yang dilakukan** pemilik, bukan **siapa** pemiliknya. "
                "Karena faktor penentunya dapat dilatih, ia menjadi sasaran "
                "intervensi pembinaan yang tepat.")
