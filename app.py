@@ -250,10 +250,6 @@ with tab4:
                           yaxis_title="True Positive Rate")
         st.plotly_chart(fig, use_container_width=True)
 
-    st.caption("💡 **Untuk juri:** turunkan ambang → recall naik (menjaring lebih "
-               "banyak UMKM berpotensi, cocok untuk program inklusif); naikkan ambang "
-               "→ precision naik (intervensi lebih tepat sasaran saat sumber daya terbatas).")
-
     st.markdown("**Perbandingan model**")
     comp = metrics["comparison"].copy()
     comp[["F1","ROC_AUC","Bal_Acc"]] = comp[["F1","ROC_AUC","Bal_Acc"]].round(3)
