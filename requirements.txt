@@ -1,0 +1,16 @@
+# requirements.txt — kunci versi agar terhindar dari konflik dependensi
+# (mis. masalah numpy/numba yang muncul saat memasang dowhy di Kaggle).
+# Pasang dengan:  pip install -r requirements.txt
+
+streamlit>=1.40,<2.0
+pandas>=2.0,<2.4
+numpy>=1.24,<2.4
+scikit-learn>=1.4,<1.9
+plotly>=5.20,<6.0
+joblib>=1.3
+shap>=0.44
+
+# Opsional — hanya jika ingin menyertakan XGBoost/LightGBM di perbandingan model.
+# Jika tidak terpasang, train.py otomatis melewatinya tanpa error.
+xgboost>=2.0
+lightgbm>=4.0
